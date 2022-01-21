@@ -1,6 +1,7 @@
 let toDoText = document.querySelector('.to-do'),
   button = document.querySelector('.submit-to-do'),
-  main = document.querySelector('.list-container');
+  main = document.querySelector('.list-container'),
+  clear = document.querySelector('.to-do-clear');
 
 // class for object creation
 class ToDo {
@@ -24,13 +25,24 @@ let items = JSON.parse(localStorage.getItem('ToDo')) || [];
 // rendering elemnts beofre anything else so we can see them from local storage on refresh
 renderElements();
 
+// clearing list
+clear.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (confirm('Do you wish to delete all Items on your list')) {
+    items = [];
+    updateToDO();
+  }
+});
+
 // onclick event
 button.addEventListener('click', (e) => {
   e.preventDefault();
-  let item = new ToDo(toDoText.value, getKey());
-  items.push(item);
-  console.log(items);
-
+  if (!toDoText.value.replace(/\s/g, '').length) {
+    alert('list item cannot be empty');
+  } else {
+    let item = new ToDo(toDoText.value, getKey());
+    items.push(item);
+  }
   renderElements();
   updateToDO();
   toDoText.value = '';
@@ -42,7 +54,7 @@ function renderElements() {
   items.forEach((item) => {
     main.innerHTML += `
             <ul>
-                <div class="container">
+                <div class="container color1">
                     <li class="to-do-item">${item.todo}</li>
                     <p class="removeItem" onclick="removeItem(${item.key})">&#10005;</p>
                 </div>
@@ -64,3 +76,20 @@ function updateToDO() {
   // save to localstorage
   localStorage.setItem('ToDo', JSON.stringify(items));
 }
+
+// themes
+let body = document.querySelector('body'),
+  color1 = document.querySelectorAll('.color1'),
+  toggleTheme = document.querySelector('.toggle-theme');
+
+toggleTheme.addEventListener('click', () => {
+  if (toggleTheme.hasAttribute('class', 'darkmode')) {
+    toggleTheme.classList.remove('darkmode');
+    console.log('now going to lightmode');
+    toggleTheme.classList.add('lightmode');
+  } else if (toggleTheme.hasAttribute('class', 'lightmode')) {
+    toggleTheme.classList.remove('lightmode');
+    console.log('now going to darkmode');
+    toggleTheme.classList.add('darkmode');
+  }
+});

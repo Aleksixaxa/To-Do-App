@@ -36,12 +36,18 @@ h1 {
   border: none;
 }
 
-.submit-to-do {
+.btn {
   font-size: 1.3em;
   padding: 0.4em 1em;
   border: none;
   color: rgba(148, 187, 233, 0.7497373949579832);
   text-transform: uppercase;
+  cursor: pointer;
+  transition: all ease 0.4s;
+}
+.btn:hover {
+  color: white;
+  background-color: rgb(238, 174, 202);
 }
 
 .list-container {
@@ -55,6 +61,7 @@ h1 {
   font-size: 1.4em;
 }
 p {
+  cursor: pointer;
   padding: 10px;
   transition: all 0.2s ease-in;
 }
