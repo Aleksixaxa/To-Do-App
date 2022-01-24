@@ -78,18 +78,3 @@ function updateToDO() {
 }
 
 // themes
-let body = document.querySelector('body'),
-  color1 = document.querySelectorAll('.color1'),
-  toggleTheme = document.querySelector('.toggle-theme');
-
-toggleTheme.addEventListener('click', () => {
-  if (toggleTheme.hasAttribute('class', 'darkmode')) {
-    toggleTheme.classList.remove('darkmode');
-    console.log('now going to lightmode');
-    toggleTheme.classList.add('lightmode');
-  } else if (toggleTheme.hasAttribute('class', 'lightmode')) {
-    toggleTheme.classList.remove('lightmode');
-    console.log('now going to darkmode');
-    toggleTheme.classList.add('darkmode');
-  }
-});
